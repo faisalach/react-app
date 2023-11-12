@@ -57,7 +57,7 @@ const Reminder = () => {
                     {
                         isLoad && reminders.map(reminder => {
                             return (
-                                <div className='flex bg-white aligns p-2 shadow border border-gray-200 rounded-lg overflow-hidden'>
+                                <div  key={"r_"+reminder.id} className='flex bg-white aligns p-2 shadow border border-gray-200 rounded-lg overflow-hidden'>
                                     <div className='bg-yellow-300 p-5 rounded-lg'>
                                         <FontAwesomeIcon fixedWidth icon={faBell} className={`text-white text-3xl`} />
                                     </div>
