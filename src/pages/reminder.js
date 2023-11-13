@@ -55,34 +55,32 @@ const Reminder = () => {
 
                 <div className='grid xl:grid-cols-3 lg:grid-cols-2 gap-2 mt-3'>
                     {
-                        isLoad && reminders.map(reminder => {
-                            return (
-                                <div  key={"r_"+reminder.id} className='flex bg-white aligns p-2 shadow border border-gray-200 rounded-lg overflow-hidden'>
-                                    <div className='bg-yellow-300 p-5 rounded-lg'>
-                                        <FontAwesomeIcon fixedWidth icon={faBell} className={`text-white text-3xl`} />
-                                    </div>
-                                    <div className='ml-3'>
-                                        <h1 className='text-xl font-semibold text-gray-800'>{reminder.title}</h1>
-                                        {
-                                            reminder.reminder_on_date && (
-                                                <p className='text-sm text-gray-500'>
-                                                    <FontAwesomeIcon fixedWidth icon={faClock} className='mr-3'/>
-                                                    {dateFormat(reminder.reminder_on_date)}
-                                                </p>
-                                            )
-                                        }
-                                        {
-                                            reminder.reminder_on_kilometer && (
-                                                <p className='text-sm text-gray-500'>
-                                                    <FontAwesomeIcon fixedWidth icon={faGauge} className='mr-3'/>
-                                                    {numberFormat(reminder.reminder_on_kilometer)} Km
-                                                </p>
-                                            )
-                                        }
-                                    </div>
+                        isLoad && reminders.map(reminder => (
+                            <div  key={"r_"+reminder.id} className='flex bg-white aligns p-2 shadow border border-gray-200 rounded-lg overflow-hidden'>
+                                <div className='bg-yellow-300 p-5 rounded-lg'>
+                                    <FontAwesomeIcon fixedWidth icon={faBell} className={`text-white text-3xl`} />
                                 </div>
-                            )
-                        })
+                                <div className='ml-3'>
+                                    <h1 className='text-xl font-semibold text-gray-800'>{reminder.title}</h1>
+                                    {
+                                        reminder.reminder_on_date && (
+                                            <p className='text-sm text-gray-500'>
+                                                <FontAwesomeIcon fixedWidth icon={faClock} className='mr-3'/>
+                                                {dateFormat(reminder.reminder_on_date)}
+                                            </p>
+                                        )
+                                    }
+                                    {
+                                        reminder.reminder_on_kilometer && (
+                                            <p className='text-sm text-gray-500'>
+                                                <FontAwesomeIcon fixedWidth icon={faGauge} className='mr-3'/>
+                                                {numberFormat(reminder.reminder_on_kilometer)} Km
+                                            </p>
+                                        )
+                                    }
+                                </div>
+                            </div>
+                        ))
                     }
                 </div>
 

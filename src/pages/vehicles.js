@@ -27,6 +27,7 @@ const Vehicles = () => {
 		vehicle_brand : '',
 		vehicle_model : '',
 		number_plate : '',
+		odometer : '',
 		last_odometer : {},
 	})
 	
@@ -47,6 +48,7 @@ const Vehicles = () => {
 			vehicle_brand : '',
 			vehicle_model : '',
 			number_plate : '',
+			odometer : '',
 			last_odometer : {},
 		});
 	}
@@ -85,6 +87,7 @@ const Vehicles = () => {
 			.catch(function (error) {
 				const data = error.response.data;
 				setError(data.message);
+				setIsSubmitForm(false);
 			});    
 		}else{
 			await Api.post('/vehicle/insert/',formData)
@@ -97,6 +100,7 @@ const Vehicles = () => {
 			.catch(function (error) {
 				const data = error.response.data;
 				setError(data.message);
+				setIsSubmitForm(false);
 			});
 		}
 	}
@@ -122,6 +126,7 @@ const Vehicles = () => {
 			vehicle_brand : vehicle.vehicle_brand,
 			vehicle_model : vehicle.vehicle_model,
 			number_plate : vehicle.number_plate,
+			odometer : vehicle.last_odometer && vehicle.last_odometer.odometer,
 			last_odometer : vehicle.last_odometer
 		});
 
@@ -161,54 +166,52 @@ const Vehicles = () => {
 				</button>
 				<div className='grid xl:grid-cols-2 lg:grid-cols-2 gap-2 mt-3'>
 					{
-						isLoad && vehicles.map(vehicle => {
-							return (
-								<div key={"v_"+vehicle.id} className='flex bg-white aligns p-2 shadow border border-gray-200 rounded-lg relative'>
-									<div className='bg-blue-500 p-5 rounded-lg'>
-										<FontAwesomeIcon fixedWidth icon={faMotorcycle} className={`text-white text-3xl`} />
-									</div>
-									<div className='ml-3'>
-										<div className='flex justify-end absolute top-0 right-0 dropdown'>
-											<button onClick={handleDropdown} className="dropdown-button font-semibold font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center" type="button">
-												<FontAwesomeIcon icon={faEllipsisVertical}/>
-											</button>
+						isLoad && vehicles.map(vehicle => (
+							<div key={"v_"+vehicle.id} className='flex bg-white aligns p-2 shadow border border-gray-200 rounded-lg relative'>
+								<div className='bg-blue-500 p-5 rounded-lg'>
+									<FontAwesomeIcon fixedWidth icon={faMotorcycle} className={`text-white text-3xl`} />
+								</div>
+								<div className='ml-3'>
+									<div className='flex justify-end absolute top-0 right-0 dropdown'>
+										<button onClick={handleDropdown} className="dropdown-button font-semibold font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center" type="button">
+											<FontAwesomeIcon icon={faEllipsisVertical}/>
+										</button>
 
-											<div className="z-10 hidden border-2 border-gray-200 dropdown-menu bg-white absolute right-[30px] rounded-lg shadow w-44 dark:bg-gray-700">
-												<ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+										<div className="z-10 hidden border-2 border-gray-200 dropdown-menu bg-white absolute right-[30px] rounded-lg shadow w-44 dark:bg-gray-700">
+											<ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+												<li>
+													<a href="#" onClick={e => {
+														handleEditForm(e,vehicle);
+													}} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+														<FontAwesomeIcon icon={faPenAlt} fixedWidth className='mr-2'/>
+														Edit
+													</a>
+												</li>
+												{ vehicles.length > 1 && (
 													<li>
 														<a href="#" onClick={e => {
-															handleEditForm(e,vehicle);
+															handleDeleteForm(e,vehicle.id);
 														}} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-															<FontAwesomeIcon icon={faPenAlt} fixedWidth className='mr-2'/>
-															Edit
+															<FontAwesomeIcon icon={faTrashAlt} fixedWidth className='mr-2'/>
+															Hapus
 														</a>
 													</li>
-													{ vehicles.length > 1 && (
-														<li>
-															<a href="#" onClick={e => {
-																handleDeleteForm(e,vehicle.id);
-															}} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-																<FontAwesomeIcon icon={faTrashAlt} fixedWidth className='mr-2'/>
-																Hapus
-															</a>
-														</li>
-													) }
-												</ul>
-											</div>
+												) }
+											</ul>
 										</div>
-										<h1 className='text-xl font-semibold text-gray-800'>{vehicle.vehicle_brand} {vehicle.vehicle_model}</h1>
-										<p className='text-sm text-gray-500'>
-											<FontAwesomeIcon fixedWidth icon={faHashtag} className='mr-2'/>
-											{vehicle.number_plate}
-										</p>
-										<p className='text-sm text-gray-500'>
-											<FontAwesomeIcon fixedWidth icon={faGauge} className='mr-2'/>
-											{vehicle.last_odometer ? numberFormat(vehicle.last_odometer.odometer) : 0} Km
-										</p>
 									</div>
+									<h1 className='text-xl font-semibold text-gray-800'>{vehicle.vehicle_brand} {vehicle.vehicle_model}</h1>
+									<p className='text-sm text-gray-500'>
+										<FontAwesomeIcon fixedWidth icon={faHashtag} className='mr-2'/>
+										{vehicle.number_plate}
+									</p>
+									<p className='text-sm text-gray-500'>
+										<FontAwesomeIcon fixedWidth icon={faGauge} className='mr-2'/>
+										{vehicle.last_odometer ? numberFormat(vehicle.last_odometer.odometer) : 0} Km
+									</p>
 								</div>
-							)
-						})
+							</div>
+						))
 					}
 				</div>
 
@@ -270,12 +273,11 @@ const Vehicles = () => {
 									id="odometer" 
 									title="Odometer" 
 									type="number"
-									disabled={Object.keys(formData.last_odometer).length > 0}
-									value={formData.last_odometer && formData.last_odometer.odometer} 
+									disabled={formData.last_odometer && Object.keys(formData.last_odometer).length > 0}
+									value={formData.odometer} 
 									onChange={handleChange} 
 									placeholder="Type the odometer (Km)" 
 									name="odometer"/>
-
 							</div>
 							<div className="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600 justify-end">
 								<button onClick={e => handleModal(false)} type="button" className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Tutup</button>

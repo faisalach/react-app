@@ -100,21 +100,19 @@ function VehicleDropdown(props) {
                 <div className={`z-10 bg-white ${!dropIsShow && 'hidden'} absolute border-2 border-blue-300 top-full left-0 right-0 rounded-lg shadow w-full mt-1 dark:bg-gray-700 `}>
                     <ul className=" text-sm text-gray-600 dark:text-gray-200">
                         {
-                            vehicles.map((vehicle) => {
-                                return (
-                                    <li key={"v_"+vehicle.id}>
-                                        <a href="#" onClick={e => {handleActiveVehicle(vehicle.id);handleDropShow();}} data-id={vehicle} className={`block px-4 py-2 rounded-md ${vehicle.id === vehicleActive.id ? "text-white text-gray-600 bg-sky-600 hover:bg-sky-800" : 'hover:bg-gray-100'} `}>
-                                            <span className='mr-4 flex items-center'>
-                                                <FontAwesomeIcon icon={faMotorcycle} className='text-4xl mr-5'/>
-                                                <div className='text-left'>
-                                                    <h3 className='text-lg font-bold'>{vehicle.vehicle_brand} {vehicle.vehicle_model}</h3>
-                                                    <p className='text-sm'>{vehicle.number_plate}</p>
-                                                </div>
-                                            </span>
-                                        </a>
-                                    </li>
-                                )
-                            })
+                            vehicles.map((vehicle) => (
+                                <li key={"v_"+vehicle.id}>
+                                    <a href="#" onClick={e => {handleActiveVehicle(vehicle.id);handleDropShow();}} data-id={vehicle} className={`block px-4 py-2 rounded-md ${vehicle.id === vehicleActive.id ? "text-white text-gray-600 bg-sky-600 hover:bg-sky-800" : 'hover:bg-gray-100'} `}>
+                                        <span className='mr-4 flex items-center'>
+                                            <FontAwesomeIcon icon={faMotorcycle} className='text-4xl mr-5'/>
+                                            <div className='text-left'>
+                                                <h3 className='text-lg font-bold'>{vehicle.vehicle_brand} {vehicle.vehicle_model}</h3>
+                                                <p className='text-sm'>{vehicle.number_plate}</p>
+                                            </div>
+                                        </span>
+                                    </a>
+                                </li>
+                            ))
                         }
                     </ul>
                 </div>

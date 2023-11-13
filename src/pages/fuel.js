@@ -114,6 +114,7 @@ const Fuel = () => {
 			.catch(function (error) {
 				const data = error.response.data;
 				setError(data.message);
+				setIsSubmitForm(false);
 			});    
 		}else{
 			await Api.post('/fuel/insert/'+vehicleActiveId,formData)
@@ -126,6 +127,7 @@ const Fuel = () => {
 			.catch(function (error) {
 				const data = error.response.data;
 				setError(data.message);
+				setIsSubmitForm(false);
 			});
 		}
 	}
@@ -196,69 +198,67 @@ const Fuel = () => {
 				</button>
 				<div>
 					{
-						isLoad && vehicleLogs.map(fuel => {
-							return (
-								<div key={`f_`+fuel.id} className="rounded-lg mb-3 bg-white border border-gray-200 rounded-lg shadow">
-									<div className="rounded-t-lg px-6 py-3 bg-sky-600 text-white grid grid-cols-2 items-center">
-										<p className='font-semibold '>{dateFormat(fuel.created_at)} {timeFormat(fuel.created_at)}</p>
-										<div className='flex justify-end relative dropdown'>
-											<button onClick={handleDropdown} className="text-white dropdown-button font-semibold font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center" type="button">
-												<FontAwesomeIcon icon={faEllipsisVertical}/>
-											</button>
+						isLoad && vehicleLogs.map(fuel => (
+							<div key={`f_`+fuel.id} className="rounded-lg mb-3 bg-white border border-gray-200 rounded-lg shadow">
+								<div className="rounded-t-lg px-6 py-3 bg-sky-600 text-white grid grid-cols-2 items-center">
+									<p className='font-semibold '>{dateFormat(fuel.created_at)} {timeFormat(fuel.created_at)}</p>
+									<div className='flex justify-end relative dropdown'>
+										<button onClick={handleDropdown} className="text-white dropdown-button font-semibold font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center" type="button">
+											<FontAwesomeIcon icon={faEllipsisVertical}/>
+										</button>
 
-											<div className="z-10 hidden border-2 border-gray-200 dropdown-menu bg-white absolute right-[30px] rounded-lg shadow w-44 dark:bg-gray-700">
-												<ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-													<li>
-														<a href="#" onClick={e => {
-															handleEditForm(e,fuel);
-														}} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-															<FontAwesomeIcon icon={faPenAlt} fixedWidth className='mr-2'/>
-															Edit
-														</a>
-													</li>
-													<li>
-														<a href="#" onClick={e => {
-															handleDeleteForm(e,fuel.id);
-														}} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-															<FontAwesomeIcon icon={faTrashAlt} fixedWidth className='mr-2'/>
-															Hapus
-														</a>
-													</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-									<div className=" px-6 py-3">
-										<div style={{ lineHeight:'30px' }} className='grid grid-cols-2 lg:grid-cols-3'>
-											<div>
-												<FontAwesomeIcon icon={faPenAlt} fixedWidth className='mr-5 text-sky-600'/>
-												{fuel.fuel_name}
-											</div>
-											<div>
-												<FontAwesomeIcon icon={faGasPump} fixedWidth className='mr-5 text-sky-600'/>
-												{numberFormat(fuel.number_of_liter)}ltr
-											</div>
-											<div>
-												<FontAwesomeIcon icon={faGauge} fixedWidth className='mr-5 text-sky-600'/>
-												{numberFormat(fuel.odometer)} Km
-											</div>
-											<div>
-												<FontAwesomeIcon icon={faCoins} fixedWidth className='mr-5 text-sky-600'/>
-												{moneyFormat(fuel.price_per_liter)}/ltr
-											</div>
-											<div>
-												<FontAwesomeIcon icon={faOilCan} fixedWidth className='mr-5 text-sky-600'/>
-												{numberFormat(fuel.fuel_consumption)} Km/l
-											</div>
-											<div>
-												<FontAwesomeIcon icon={faMoneyBillWave} fixedWidth className='mr-5 text-sky-600'/>
-												{moneyFormat(fuel.total_price)}
-											</div>
+										<div className="z-10 hidden border-2 border-gray-200 dropdown-menu bg-white absolute right-[30px] rounded-lg shadow w-44 dark:bg-gray-700">
+											<ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+												<li>
+													<a href="#" onClick={e => {
+														handleEditForm(e,fuel);
+													}} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+														<FontAwesomeIcon icon={faPenAlt} fixedWidth className='mr-2'/>
+														Edit
+													</a>
+												</li>
+												<li>
+													<a href="#" onClick={e => {
+														handleDeleteForm(e,fuel.id);
+													}} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+														<FontAwesomeIcon icon={faTrashAlt} fixedWidth className='mr-2'/>
+														Hapus
+													</a>
+												</li>
+											</ul>
 										</div>
 									</div>
 								</div>
-							)
-						})
+								<div className=" px-6 py-3">
+									<div style={{ lineHeight:'30px' }} className='grid grid-cols-2 lg:grid-cols-3'>
+										<div>
+											<FontAwesomeIcon icon={faPenAlt} fixedWidth className='mr-5 text-sky-600'/>
+											{fuel.fuel_name}
+										</div>
+										<div>
+											<FontAwesomeIcon icon={faGasPump} fixedWidth className='mr-5 text-sky-600'/>
+											{numberFormat(fuel.number_of_liter)}ltr
+										</div>
+										<div>
+											<FontAwesomeIcon icon={faGauge} fixedWidth className='mr-5 text-sky-600'/>
+											{numberFormat(fuel.odometer)} Km
+										</div>
+										<div>
+											<FontAwesomeIcon icon={faCoins} fixedWidth className='mr-5 text-sky-600'/>
+											{moneyFormat(fuel.price_per_liter)}/ltr
+										</div>
+										<div>
+											<FontAwesomeIcon icon={faOilCan} fixedWidth className='mr-5 text-sky-600'/>
+											{numberFormat(fuel.fuel_consumption)} Km/l
+										</div>
+										<div>
+											<FontAwesomeIcon icon={faMoneyBillWave} fixedWidth className='mr-5 text-sky-600'/>
+											{moneyFormat(fuel.total_price)}
+										</div>
+									</div>
+								</div>
+							</div>
+						))
 					}
 					{ (isLoad && vehicleLogs.length === 0) && (<div className='text-center my-5 w-100 ring ring-sky-200 rounded-md p-8 text-sky-500'>
 						<p>Belum Ada Data</p>

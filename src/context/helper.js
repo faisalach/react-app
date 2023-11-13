@@ -1,6 +1,9 @@
 
 export const helper = () => {
     const numberFormat = (text) => {
+        if(text === undefined){
+            return "";
+        }
         text    = text.toString();
         if(text.match(/[0-9]/g)){
             text    = parseFloat(text.replace(/[^0-9.]/g,''));
