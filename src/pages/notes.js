@@ -260,9 +260,9 @@ const Vehicles = () => {
 			<Navbar page="notes" title="Catatan Lain">
 				<VehicleDropdown handleVehicleId={handleVehicleId}/>
 
-				<button type="button" onClick={e => handleModal(true)} className="text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mt-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+				<button type="button" onClick={e => handleModal(true)} className="fixed bottom-10 z-10 right-10 text-white bg-sky-600 hover:bg-sky-800 font-medium text-2xl rounded-full px-4 py-[15px] ring-2 ring-gray-300 shadow-lg sm:ring-0 sm:shadow-none sm:py-2.5 mr-2 mt-2 mb-2 sm:rounded-lg sm:static sm:text-sm">
 					<FontAwesomeIcon fixedWidth icon={faPlus}/>
-					Tambah Catatan
+					<span className='sm:inline hidden'>Tambah Catatan</span>
 				</button>
 				<div>
 					{

@@ -39,7 +39,7 @@ const Navbar = ({children,page,title}) => {
 
 	return (
 		<>
-			<nav className="fixed sm:w-64 z-50 top-0 left-0 right-0 bg-sky-600 border-emerald-200 dark:bg-emerald-900 dark:border-emerald-700">
+			<nav className="fixed sm:w-64 z-50 top-0 left-0 right-0 bg-sky-600 border-emerald-200 dark:bg-emerald-900 dark:border-emerald-700 shadow-lg">
 				<div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
 					<Link to="/" className="flex items-center">
 						<img src="https://flowbite.com/docs/images/logo.svg" className="h-8 mr-3" alt="Flowbite Logo" />
@@ -104,7 +104,7 @@ const Navbar = ({children,page,title}) => {
 				</div>
 			</aside>
 
-			<div className="p-4 pb-14 sm:ml-64 sm:mt-0 mt-[64px] bg-gray-50 min-h-screen">
+			<div className="p-4 sm:pb-14 sm:ml-64 sm:mt-0 mt-[64px] bg-gray-50 min-h-screen">
 				{
 					title && (
 						<h1 className="lg:text-3xl sm:text-2xl text-xl font-bold mb-5 text-gray-700 ml-5">{title}</h1>
@@ -112,7 +112,7 @@ const Navbar = ({children,page,title}) => {
 				}
 				{children}
 			</div>
-			<div className="h-14 bg-white border-t-2 fixed bottom-0 left-64 right-0 border-gray-200 flex items-center">
+			<div className="h-14 bg-white border-t-2 sm:fixed sm:bottom-0 sm:left-64 sm:right-0 border-gray-200 flex items-center">
 				<p className="p-3">&copy; Copyright <a href="https://github.com/faisalach" className="font-bold" rel="noreferrer" target="_blank">Muhammad Faisal</a> {new Date().getFullYear()}.</p>
 			</div>
 			<div onClick={handleCloseAllDropdown} id='backdoor_dropdown' className='fixed hidden top-0 left-0 right-0 bottom-0'></div>
