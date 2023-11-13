@@ -102,7 +102,7 @@ function VehicleDropdown(props) {
                         {
                             vehicles.map((vehicle) => (
                                 <li key={"v_"+vehicle.id}>
-                                    <a href="/#" onClick={e => {handleActiveVehicle(vehicle.id);handleDropShow();}} data-id={vehicle} className={`block px-4 py-2 rounded-md ${vehicle.id === vehicleActive.id ? "text-white text-gray-600 bg-sky-600 hover:bg-sky-800" : 'hover:bg-gray-100'} `}>
+                                    <a href="/#" onClick={e => {e.preventDefault();handleActiveVehicle(vehicle.id,e);handleDropShow();}} data-id={vehicle} className={`block px-4 py-2 rounded-md ${vehicle.id === vehicleActive.id ? "text-white text-gray-600 bg-sky-600 hover:bg-sky-800" : 'hover:bg-gray-100'} `}>
                                         <span className='mr-4 flex items-center'>
                                             <FontAwesomeIcon icon={faMotorcycle} className='text-4xl mr-5'/>
                                             <div className='text-left'>

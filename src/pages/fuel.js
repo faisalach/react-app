@@ -201,7 +201,7 @@ const Fuel = () => {
 						isLoad && vehicleLogs.map(fuel => (
 							<div key={`f_`+fuel.id} className="rounded-lg mb-3 bg-white border border-gray-200 rounded-lg shadow">
 								<div className="rounded-t-lg px-6 py-3 bg-sky-600 text-white grid grid-cols-2 items-center">
-									<p className='font-semibold '>{dateFormat(fuel.created_at)} {timeFormat(fuel.created_at)}</p>
+									<p className='font-semibold '>{dateFormat(fuel.filling_date)} {timeFormat(fuel.filling_date)}</p>
 									<div className='flex justify-end relative dropdown'>
 										<button onClick={handleDropdown} className="text-white dropdown-button font-semibold font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center" type="button">
 											<FontAwesomeIcon icon={faEllipsisVertical}/>
