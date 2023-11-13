@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBarsStaggered, faBell, faCar, faChartSimple, faGears, faHome, faHomeAlt, faMotorcycle, faNoteSticky, faRightFromBracket, faRoute, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faBarsStaggered, faBell, faChartSimple, faHomeAlt, faMotorcycle, faNoteSticky, faRightFromBracket, faRoute, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../context/useAuth";
 import Api from "../context/api";
 import { Link } from "react-router-dom";
@@ -113,7 +113,7 @@ const Navbar = ({children,page,title}) => {
 				{children}
 			</div>
 			<div className="h-14 bg-white border-t-2 fixed bottom-0 left-64 right-0 border-gray-200 flex items-center">
-				<p className="p-3">&copy; Copyright <a href="https://github.com/faisalach" className="font-bold" target="_blank">Muhammad Faisal</a> {new Date().getFullYear()}.</p>
+				<p className="p-3">&copy; Copyright <a href="https://github.com/faisalach" className="font-bold" rel="noreferrer" target="_blank">Muhammad Faisal</a> {new Date().getFullYear()}.</p>
 			</div>
 			<div onClick={handleCloseAllDropdown} id='backdoor_dropdown' className='fixed hidden top-0 left-0 right-0 bottom-0'></div>
 		</>

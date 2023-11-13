@@ -16,7 +16,7 @@ const Vehicles = () => {
 	const navigate = useNavigate();
 	const {authData} = useContext(authContext);
 	const [vehicles, setVehicles] = useState([]);
-	const { dateFormat,numberFormat } = helper();
+	const { numberFormat } = helper();
 	const [isLoad, setIsLoad] = useState(false);
 	const [isSubmitForm, setIsSubmitForm] = useState(false);
 	const [showModal,setShowModal]  = useState(false);
@@ -180,7 +180,7 @@ const Vehicles = () => {
 										<div className="z-10 hidden border-2 border-gray-200 dropdown-menu bg-white absolute right-[30px] rounded-lg shadow w-44 dark:bg-gray-700">
 											<ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
 												<li>
-													<a href="#" onClick={e => {
+													<a href="/#" onClick={e => {
 														handleEditForm(e,vehicle);
 													}} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
 														<FontAwesomeIcon icon={faPenAlt} fixedWidth className='mr-2'/>
@@ -189,7 +189,7 @@ const Vehicles = () => {
 												</li>
 												{ vehicles.length > 1 && (
 													<li>
-														<a href="#" onClick={e => {
+														<a href="/#" onClick={e => {
 															handleDeleteForm(e,vehicle.id);
 														}} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
 															<FontAwesomeIcon icon={faTrashAlt} fixedWidth className='mr-2'/>

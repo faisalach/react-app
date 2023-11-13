@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import authContext from '../context/authContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Api from '../context/api';
-import { faBell, faBellConcierge, faClock, faGauge } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faClock, faGauge } from '@fortawesome/free-solid-svg-icons';
 import { Spinner } from 'flowbite-react';
 import { helper } from '../context/helper';
 

@@ -5,11 +5,22 @@ import VehicleDropdown from '../components/VehicleDropdown';
 import { useNavigate } from 'react-router-dom';
 import authContext from '../context/authContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Highcharts from 'highcharts'
+import HighchartsReact from 'highcharts-react-official'
 
 const Statistic = () => {
 
 	const navigate = useNavigate();
 	const {authData} = useContext(authContext);
+
+	const options = {
+		title: {
+		  text: 'My chart'
+		},
+		series: [{
+		  data: [1, 2, 3]
+		}]
+	}
 
 	useEffect(() => {
 		if(!authData.signedIn) {
@@ -22,6 +33,10 @@ const Statistic = () => {
 	return (
 		<>
 			<Navbar page="statistic" title="Statistik">
+				<HighchartsReact
+					highcharts={Highcharts}
+					options={options}
+				/>
 				<ul>
 					<li>DATA JUMLAH JARAK TEMPUH</li>
 					<li>DATA JUMLAH LITER BBM</li>

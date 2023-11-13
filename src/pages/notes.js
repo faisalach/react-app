@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import authContext from '../context/authContext';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGasPump,faGauge,faMoneyBillWave,faOilCan,faCoins,faPenAlt, faPlus, faTimes, faChevronLeft, faBars, faDotCircle, faEllipsisVertical, faTrashAlt, faClock } from "@fortawesome/free-solid-svg-icons";
+import { faGauge,faPenAlt, faPlus, faTimes, faEllipsisVertical, faTrashAlt, faClock } from "@fortawesome/free-solid-svg-icons";
 import { helper } from "../context/helper";
 import Api from "../context/api";
 import { Spinner } from 'flowbite-react';
@@ -278,7 +278,7 @@ const Vehicles = () => {
 										<div className="z-10 hidden border-2 border-gray-200 dropdown-menu bg-white absolute right-[30px] rounded-lg shadow w-44 dark:bg-gray-700">
 											<ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
 												<li>
-													<a href="#" onClick={e => {
+													<a href="/#" onClick={e => {
 														handleEditForm(e,maintenance);
 													}} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
 														<FontAwesomeIcon icon={faPenAlt} fixedWidth className='mr-2'/>
@@ -286,7 +286,7 @@ const Vehicles = () => {
 													</a>
 												</li>
 												<li>
-													<a href="#" onClick={e => {
+													<a href="/#" onClick={e => {
 														handleDeleteForm(e,maintenance.id);
 													}} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
 														<FontAwesomeIcon icon={faTrashAlt} fixedWidth className='mr-2'/>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Api from '../context/api';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCar, faL, faMotorcycle } from '@fortawesome/free-solid-svg-icons';
+import { faMotorcycle } from '@fortawesome/free-solid-svg-icons';
 
 function VehicleDropdown(props) {
     const [vehicles, setVehicles] = useState([]);
@@ -86,7 +86,7 @@ function VehicleDropdown(props) {
                                 </div>
                             ) : (
                                 <div className='text-left'>
-                                    <h3 className='load-wraper h-[25px] mb-2 w-[120px]'></h3>
+                                    <p className='load-wraper h-[25px] mb-2 w-[120px]'></p>
                                     <p className='load-wraper h-[20px] w-[70px]'></p>
                                 </div>
                             )
@@ -102,7 +102,7 @@ function VehicleDropdown(props) {
                         {
                             vehicles.map((vehicle) => (
                                 <li key={"v_"+vehicle.id}>
-                                    <a href="#" onClick={e => {handleActiveVehicle(vehicle.id);handleDropShow();}} data-id={vehicle} className={`block px-4 py-2 rounded-md ${vehicle.id === vehicleActive.id ? "text-white text-gray-600 bg-sky-600 hover:bg-sky-800" : 'hover:bg-gray-100'} `}>
+                                    <a href="/#" onClick={e => {handleActiveVehicle(vehicle.id);handleDropShow();}} data-id={vehicle} className={`block px-4 py-2 rounded-md ${vehicle.id === vehicleActive.id ? "text-white text-gray-600 bg-sky-600 hover:bg-sky-800" : 'hover:bg-gray-100'} `}>
                                         <span className='mr-4 flex items-center'>
                                             <FontAwesomeIcon icon={faMotorcycle} className='text-4xl mr-5'/>
                                             <div className='text-left'>
