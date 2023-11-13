@@ -14,6 +14,7 @@ const Statistic = () => {
 	const [chartKilometer,setChartKilometer] = useState([]);
 	const [chartFuel,setChartFuel] = useState([]);
 	const [chartFc,setChartFc] = useState([]);
+	const [chartPrices,setChartPrices] = useState([]);
 
 	const getDataForChartKilometer = async () => {        
         await Api.get('/chart/get_data_chart_kilometer',{
@@ -51,6 +52,18 @@ const Statistic = () => {
         });
     }
 
+	const getDataForChartPrices = async () => {        
+        await Api.get('/chart/get_data_chart_total_prices',{
+            withCredentials: true
+        })
+        .then(function (response) {
+            setChartPrices(getOptionChart("Jumlah Pengeluaran","Rp",response.data));
+        })
+        .catch(function (error) {
+            console.log(error.code);
+        });
+    }
+
 	
 	const getOptionChart 	= (title,yAxisTitle,data) => {
 		const option = {
@@ -79,6 +92,7 @@ const Statistic = () => {
 		getDataForChartKilometer();
 		getDataForChartFuel();
 		getDataForChartFc();
+		getDataForChartPrices();
 	}, []);
 
 	return (
@@ -101,6 +115,12 @@ const Statistic = () => {
 						<HighchartsReact
 							highcharts={Highcharts}
 							options={chartFc}
+						/>
+					</div>
+					<div className='bg-white shadow p-3 rounded-lg'>
+						<HighchartsReact
+							highcharts={Highcharts}
+							options={chartPrices}
 						/>
 					</div>
 				</div>
