@@ -1,25 +1,74 @@
 import React, { useContext, useEffect, useState } from 'react';
 
 import Navbar from '../components/Navbar';
-import VehicleDropdown from '../components/VehicleDropdown';
 import { useNavigate } from 'react-router-dom';
 import authContext from '../context/authContext';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
+import Api from '../context/api';
 
 const Statistic = () => {
 
 	const navigate = useNavigate();
 	const {authData} = useContext(authContext);
+	const [chartKilometer,setChartKilometer] = useState([]);
+	const [chartFuel,setChartFuel] = useState([]);
+	const [chartFc,setChartFc] = useState([]);
 
-	const options = {
-		title: {
-		  text: 'My chart'
-		},
-		series: [{
-		  data: [1, 2, 3]
-		}]
+	const getDataForChartKilometer = async () => {        
+        await Api.get('/chart/get_data_chart_kilometer',{
+            withCredentials: true
+        })
+        .then(function (response) {
+            setChartKilometer(getOptionChart("Jarak Tempuh","Km",response.data));
+        })
+        .catch(function (error) {
+            console.log(error.code);
+        });
+    }
+
+	const getDataForChartFuel = async () => {        
+        await Api.get('/chart/get_data_chart_fuel',{
+            withCredentials: true
+        })
+        .then(function (response) {
+            setChartFuel(getOptionChart("Jumlah Liter BBM","liter",response.data));
+        })
+        .catch(function (error) {
+            console.log(error.code);
+        });
+    }
+
+	const getDataForChartFc = async () => {        
+        await Api.get('/chart/get_data_chart_fc',{
+            withCredentials: true
+        })
+        .then(function (response) {
+            setChartFc(getOptionChart("Rata-rata Konsumsi BBM","Km/l",response.data));
+        })
+        .catch(function (error) {
+            console.log(error.code);
+        });
+    }
+
+	
+	const getOptionChart 	= (title,yAxisTitle,data) => {
+		const option = {
+			title: {
+			  text: title
+			},
+			xAxis: {
+				categories: data.month
+			},
+			series: data.data,
+			yAxis: {
+				title: {
+					text: yAxisTitle
+				}
+			},
+		}
+
+		return option;
 	}
 
 	useEffect(() => {
@@ -27,23 +76,34 @@ const Statistic = () => {
 			return navigate("/login")
 		}
 
-		
+		getDataForChartKilometer();
+		getDataForChartFuel();
+		getDataForChartFc();
 	}, []);
 
 	return (
 		<>
 			<Navbar page="statistic" title="Statistik">
-				<HighchartsReact
-					highcharts={Highcharts}
-					options={options}
-				/>
-				<ul>
-					<li>DATA JUMLAH JARAK TEMPUH</li>
-					<li>DATA JUMLAH LITER BBM</li>
-					<li>DATA RATA-RATA KONSUMSI BBM</li>
-					<li>DATA PER BULAN, PER 3 BULAN, PER 6 BULAN, PER TAHUN</li>
-					<li>DATA PER KENDARAAN / SEMUA KENDARAAN</li>
-				</ul>
+				<div className='grid grid-cols-2 gap-3 mb-5'>
+					<div className='bg-white shadow p-3 rounded-lg'>
+						<HighchartsReact
+							highcharts={Highcharts}
+							options={chartKilometer}
+						/>
+					</div>
+					<div className='bg-white shadow p-3 rounded-lg'>
+						<HighchartsReact
+							highcharts={Highcharts}
+							options={chartFuel}
+						/>
+					</div>
+					<div className='bg-white shadow p-3 rounded-lg'>
+						<HighchartsReact
+							highcharts={Highcharts}
+							options={chartFc}
+						/>
+					</div>
+				</div>
 			</Navbar>
 		</>
 
