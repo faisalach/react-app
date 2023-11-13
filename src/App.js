@@ -9,6 +9,8 @@ import Statistic from './pages/statistic';
 import Vehicles from './pages/vehicles';
 import Login from './pages/login';
 import Register from './pages/register';
+import ForgotPassword from './pages/forgot_password';
+import ResetPassword from './pages/reset_password';
 import { Layout } from './components/Layout';
 import AuthContext from './context/authContext';
 import { useAuth } from "./context/useAuth";
@@ -28,6 +30,8 @@ function App() {
                     <Route path='/vehicles' element={<Vehicles />} />
                     <Route path='/login' element={<Login />} />
                     <Route path='/register' element={<Register />} />
+                    <Route path='/forgot_password' element={<ForgotPassword />} />
+                    <Route path='/reset_password' element={<ResetPassword />} />
                 </Routes>
             </Layout>
         </AuthContext.Provider>

@@ -35,7 +35,7 @@ export const useAuth = () => {
     }
     const loginUserOnStartup = async () => {
         const cookie = new Cookies();
-        const pageNoCredential  = ["/login","/register"];
+        const pageNoCredential  = ["/login","/register","/forgot_password","/reset_password"];
 
         if(cookie.get('is_auth')) {
             await Api.post('/user',{},{
