@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import { Link, useNavigate } from 'react-router-dom';
 import authContext from '../context/authContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faChartSimple, faMotorcycle, faNoteSticky, faRoute } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faChartSimple, faGasPump, faMotorcycle, faNoteSticky, faRoute } from '@fortawesome/free-solid-svg-icons';
 
 const Home = () => {
 
@@ -26,10 +26,10 @@ const Home = () => {
 
 					<Link to="/fuel" className='flex bg-white aligns p-2 shadow border border-gray-200 rounded-lg overflow-hidden'>
 						<div className='bg-gray-500 p-5 rounded-lg'>
-							<FontAwesomeIcon fixedWidth icon={faRoute} className={`text-white text-3xl`} />
+							<FontAwesomeIcon fixedWidth icon={faGasPump} className={`text-white text-3xl`} />
 						</div>
 						<div className='ml-3'>
-							<h1 className='text-xl font-semibold text-gray-800'>Catatan Perjalanan</h1>
+							<h1 className='text-xl font-semibold text-gray-800'>Catatan BBM</h1>
 							<p className='text-sm text-gray-500'>
 								Catat pengisian bahan bakarmu!
 							</p>
