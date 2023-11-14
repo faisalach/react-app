@@ -6,6 +6,7 @@ import { useAuth } from '../context/useAuth';
 import AuthContext from "../context/authContext";
 import Spinner from "../components/Spinner";
 import PopUpAlert from '../components/PopUpAlert';
+import Logo from '../components/Logo';
 
  
 const ForgotPassword = () => {
@@ -50,7 +51,9 @@ const ForgotPassword = () => {
 		<div className="grid sm:grid-cols-12">
 			<img className='md:col-span-8 sm:col-span-6 w-full h-full max-h-[200px] sm:max-h-full object-cover' src='/images/bg-depan.jpg' alt='' />
 			<div className='md:col-span-4 sm:col-span-6 sm:min-h-screen sm:p-10 p-7'>
-				<h1 className="md:text-5xl text-2xl md:mb-7 mb-5 sm:mt-5">Forgot <br/> Password</h1>
+				<div className='md:mb-10 md:mt-10 mb-5 sm:mt-5 flex justify-center'>
+					<Logo color={'text-gray-700'}/>
+				</div>
 				<p className="text-gray-500 md:text-md text-sm">Forgot for setup new password</p>
 				{ error !== '' && (
 					<div className="p-4 my-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
@@ -58,13 +61,13 @@ const ForgotPassword = () => {
 					</div>
 				)}
 				
-				<div className="md:mt-10 mt-5">
+				<div className="mt-5">
 					<form onSubmit={ submit }>
 						<div className="mb-3">
 							<label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
 							<input id='email' placeholder="Type your email" onChange={ e => setEmail(e.target.value)} type="text" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required/>
 						</div>
-						<div className='h-[140px]'></div>
+						<div className='h-[70px]'></div>
 						
 						<div className="d-grid gap-2 mt-5">
 							<p className="text-gray-500 text-center">Have an account? <Link to="/login" className='text-blue-700 hover:text-blue-500'>Login</Link></p>

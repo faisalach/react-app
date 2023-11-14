@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBarsStaggered, faBell, faChartSimple, faHomeAlt, faMotorcycle, faNoteSticky, faRightFromBracket, faRoute, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faBarsStaggered, faBell, faChartSimple, faGears, faHomeAlt, faMotorcycle, faNoteSticky, faRightFromBracket, faRoute, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../context/useAuth";
 import Api from "../context/api";
 import { Link } from "react-router-dom";
+import Logo from "./Logo";
  
 const Navbar = ({children,page,title}) => {
 
@@ -41,9 +42,8 @@ const Navbar = ({children,page,title}) => {
 		<>
 			<nav className="fixed sm:w-64 z-50 top-0 left-0 right-0 bg-sky-600 border-emerald-200 dark:bg-emerald-900 dark:border-emerald-700 shadow-lg">
 				<div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-					<Link to="/" className="flex items-center">
-						<img src="https://flowbite.com/docs/images/logo.svg" className="h-8 mr-3" alt="Flowbite Logo" />
-						<span className="self-center text-2xl font-semibold whitespace-nowrap text-white">Flowbite</span>
+					<Link to="/">
+						<Logo color={"text-white"}/>
 					</Link>
 					<button onClick={handleSidebar} type="button" className="inline-flex sm:hidden items-center text-sm text-white ">
 						<span className="sr-only">Open sidebar</span>

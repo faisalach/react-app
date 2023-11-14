@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import authContext from '../context/authContext';
 import Spinner from '../components/Spinner';
 import { useAuth } from '../context/useAuth';
+import Logo from '../components/Logo';
  
 const Register = () => {
 	const navigate = useNavigate();
@@ -47,7 +48,9 @@ const Register = () => {
 		<div className="grid sm:grid-cols-12">
 			<img className='md:col-span-8 sm:col-span-6 w-full h-full max-h-[200px] sm:max-h-full object-cover' src='/images/bg-depan.jpg' alt='' />
 			<div className='md:col-span-4 sm:col-span-6 sm:min-h-screen sm:p-10 p-7'>
-				<h1 className="md:text-5xl text-2xl md:mb-7 mb-5 sm:mt-5">Welcome <br/> User</h1>
+				<div className='md:mb-10 md:mt-10 mb-5 sm:mt-5 flex justify-center'>
+					<Logo color={'text-gray-700'}/>
+				</div>
 				<p className="text-gray-500 md:text-md text-sm">Register to join</p>
 				{ error !== '' && (
 					<div className="p-4 my-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
@@ -55,7 +58,7 @@ const Register = () => {
 					</div>
 				)}
 				
-				<div className="md:mt-10 mt-5">
+				<div className="mt-5">
 					<form onSubmit={ submit }>
 						<div className="mb-3">
 							<label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
