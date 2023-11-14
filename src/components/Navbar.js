@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBarsStaggered, faBell, faChartSimple, faGears, faHomeAlt, faMotorcycle, faNoteSticky, faRightFromBracket, faRoute, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faBarsStaggered, faBell, faChartSimple, faGasPump, faGears, faHomeAlt, faMotorcycle, faNoteSticky, faRightFromBracket, faRoute, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../context/useAuth";
 import Api from "../context/api";
 import { Link } from "react-router-dom";
@@ -66,8 +66,8 @@ const Navbar = ({children,page,title}) => {
 						</li>
 						<li>
 							<Link to="/fuel" className={`flex items-center p-2 rounded-lg ${page === "fuel" ? 'text-white bg-sky-600 hover:bg-sky-900' : "text-gray-900 hover:bg-gray-100"} group`}>
-								<FontAwesomeIcon fixedWidth icon={faRoute} className={`${page === "fuel" ? 'text-white' : "text-gray-500 "} text-xl`} />
-								<span className="flex-1 ml-3 whitespace-nowrap">Catatan Perjalanan</span>
+								<FontAwesomeIcon fixedWidth icon={faGasPump} className={`${page === "fuel" ? 'text-white' : "text-gray-500 "} text-xl`} />
+								<span className="flex-1 ml-3 whitespace-nowrap">Catatan BBM</span>
 							</Link>
 						</li>
 						<li>
