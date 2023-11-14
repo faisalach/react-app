@@ -98,7 +98,7 @@ const Statistic = () => {
 	return (
 		<>
 			<Navbar page="statistic" title="Statistik">
-				<div className='grid grid-cols-2 gap-3 mb-5'>
+				<div className='grid grid-cols-1 lg:grid-cols-2 gap-3 mb-5'>
 					<div className='bg-white shadow p-3 rounded-lg'>
 						<HighchartsReact
 							highcharts={Highcharts}

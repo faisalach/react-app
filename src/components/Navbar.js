@@ -40,7 +40,7 @@ const Navbar = ({children,page,title}) => {
 
 	return (
 		<>
-			<nav className="fixed sm:w-64 z-50 top-0 left-0 right-0 bg-sky-600 border-emerald-200 dark:bg-emerald-900 dark:border-emerald-700 shadow-lg">
+			<nav className="fixed sm:w-64 z-50 top-0 left-0 right-0 bg-sky-600 border-emerald-200 dark:bg-emerald-900 dark:border-emerald-700 sm:shadow-none shadow">
 				<div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
 					<Link to="/">
 						<Logo color={"text-white"}/>
