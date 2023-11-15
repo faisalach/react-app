@@ -1,23 +1,20 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import Navbar from '../components/Navbar';
 import { Link, useNavigate } from 'react-router-dom';
-import authContext from '../context/authContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faChartSimple, faGasPump, faMotorcycle, faNoteSticky, faRoute } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faChartSimple, faGasPump, faMotorcycle, faNoteSticky } from '@fortawesome/free-solid-svg-icons';
+import { useAuth } from '../context/useAuth';
 
 const Home = () => {
 
-	const navigate = useNavigate();
-	const {authData} = useContext(authContext);
-
+	const navigate 		= useNavigate();
+	const {userData} 	= useAuth();
 	useEffect(() => {
-		if(!authData.signedIn) {
-			return navigate("/login")
+		if(!userData.signedIn) {
+			navigate('/login');
 		}
-
-		
-	}, []);
+	}, [userData.signedIn,navigate]);
 
 	return (
 		<>

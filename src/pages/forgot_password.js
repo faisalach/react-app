@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import  { Link, useNavigate } from 'react-router-dom';
 import Api from '../context/api';
 
 import { useAuth } from '../context/useAuth';
-import AuthContext from "../context/authContext";
 import Spinner from "../components/Spinner";
 import PopUpAlert from '../components/PopUpAlert';
 import Logo from '../components/Logo';
@@ -11,13 +10,12 @@ import Logo from '../components/Logo';
  
 const ForgotPassword = () => {
 	const navigate = useNavigate();
-	const {setAsLogged} = useAuth();
-	const {authData} = useContext(AuthContext);
+	const {userData} 	= useAuth();
 	useEffect(() => {
-		if(authData.signedIn) {
+		if(userData.signedIn) {
 			navigate('/');
 		}
-	}, []);
+	}, [userData.signedIn,navigate]);
 
 	const [error, setError] = useState('');
 	const [email, setEmail] = useState('');

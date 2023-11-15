@@ -1,20 +1,26 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Navbar from '../components/Navbar';
 import Input from '../components/Input';
 import { useNavigate } from 'react-router-dom';
-import authContext from '../context/authContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical, faGauge, faHashtag, faMotorcycle, faPenAlt, faPlus, faTimes, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { helper } from '../context/helper';
 import Api from '../context/api';
 import { Spinner } from 'flowbite-react';
 import PopUpAlert from '../components/PopUpAlert';
+import { useAuth } from '../context/useAuth';
 
 const Vehicles = () => {
 
-	const navigate = useNavigate();
-	const {authData} = useContext(authContext);
+	const navigate 		= useNavigate();
+	const {userData} 	= useAuth();
+	useEffect(() => {
+		if(!userData.signedIn) {
+			navigate('/login');
+		}
+	}, [userData.signedIn,navigate]);
+
 	const [vehicles, setVehicles] = useState([]);
 	const { numberFormat } = helper();
 	const [isLoad, setIsLoad] = useState(false);
@@ -150,10 +156,6 @@ const Vehicles = () => {
 	}
 
 	useEffect(() => {
-		if(!authData.signedIn) {
-			return navigate("/login")
-		}
-
 		getVehicles();
 	}, []);
 

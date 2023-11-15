@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBarsStaggered, faBell, faChartSimple, faGasPump, faGears, faHomeAlt, faMotorcycle, faNoteSticky, faRightFromBracket, faRoute, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faBarsStaggered, faBell, faChartSimple, faGasPump, faHomeAlt, faMotorcycle, faNoteSticky, faRightFromBracket, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../context/useAuth";
 import Api from "../context/api";
 import { Link } from "react-router-dom";
@@ -20,9 +20,8 @@ const Navbar = ({children,page,title}) => {
 	}
 
 	const handleLogout = () => {
-		Api.post('/logout',{},{
-			withCredentials: true
-		}).then(response => {
+		Api.post('/logout')
+		.then(response => {
 			setLogout();
 		}).catch(err => {
 			console.log(err);

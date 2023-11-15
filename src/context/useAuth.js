@@ -1,19 +1,12 @@
-import React, {useContext, useEffect} from "react";
+import { useState } from "react";
 import {Cookies} from "react-cookie";
 import {useNavigate} from "react-router-dom";
-import AuthContext from "./authContext";
 import Api from "./api";
 
 export const useAuth = () => {
     let navigate = useNavigate();
-    const cookieGlobal = new Cookies();
-    
-    const [userData, setUserData] = React.useState({signedIn: cookieGlobal.get("is_auth")});
-    const {setAuthData} = useContext(AuthContext);
-
-    useEffect(() => {
-        setAuthData(userData);
-    }, [userData.signedIn]);
+    const cookie = new Cookies();
+    const [userData, setUserData] = useState({signedIn: cookie.get("is_auth")});
 
     const getAuthCookieExpiration = () => {
         let date = new Date();
@@ -21,20 +14,16 @@ export const useAuth = () => {
         return date;
     }
     const setAsLogged = (user) => {
-        const cookie = new Cookies();
         cookie.set('is_auth', true, {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});
         setUserData({signedIn: true});
-        navigate('/');
     }
     const setLogout = () => {
-        const cookie = new Cookies();
         cookie.remove('is_auth', {path: '/', expires: getAuthCookieExpiration(), sameSite: 'lax', httpOnly: false});
         setUserData({signedIn: false});
         localStorage.removeItem("vehicleActive")
         navigate('/login');
     }
     const loginUserOnStartup = async () => {
-        const cookie = new Cookies();
         const pageNoCredential  = ["/login","/register","/forgot_password","/reset_password"];
 
         if(cookie.get('is_auth')) {

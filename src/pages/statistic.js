@@ -1,16 +1,22 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Navbar from '../components/Navbar';
 import { useNavigate } from 'react-router-dom';
-import authContext from '../context/authContext';
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import Api from '../context/api';
+import { useAuth } from '../context/useAuth';
 
 const Statistic = () => {
 
-	const navigate = useNavigate();
-	const {authData} = useContext(authContext);
+	const navigate 		= useNavigate();
+	const {userData} 	= useAuth();
+	useEffect(() => {
+		if(!userData.signedIn) {
+			navigate('/login');
+		}
+	}, [userData.signedIn,navigate]);
+
 	const [chartKilometer,setChartKilometer] = useState([]);
 	const [chartFuel,setChartFuel] = useState([]);
 	const [chartFc,setChartFc] = useState([]);
@@ -85,10 +91,6 @@ const Statistic = () => {
 	}
 
 	useEffect(() => {
-		if(!authData.signedIn) {
-			return navigate("/login")
-		}
-
 		getDataForChartKilometer();
 		getDataForChartFuel();
 		getDataForChartFc();

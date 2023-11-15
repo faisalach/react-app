@@ -1,23 +1,28 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Navbar from '../components/Navbar';
 import Input from '../components/Input';
 import PopUpAlert from '../components/PopUpAlert';
 import VehicleDropdown from '../components/VehicleDropdown';
 import { useNavigate } from 'react-router-dom';
-import authContext from '../context/authContext';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGauge,faPenAlt, faPlus, faTimes, faEllipsisVertical, faTrashAlt, faClock } from "@fortawesome/free-solid-svg-icons";
 import { helper } from "../context/helper";
 import Api from "../context/api";
 import { Spinner } from 'flowbite-react';
 import FormDetailMaintenance from '../components/FormDetailMaintenance';
+import { useAuth } from '../context/useAuth';
 
 const Vehicles = () => {
 
-	const navigate = useNavigate();
-	const {authData} = useContext(authContext);
+	const navigate 		= useNavigate();
+	const {userData} 	= useAuth();
+	useEffect(() => {
+		if(!userData.signedIn) {
+			navigate('/login');
+		}
+	}, [userData.signedIn,navigate]);
+
 	const [vehicleActiveId, setVehicleActiveId] = useState(0);
 	const { dateFormat,timeFormat,moneyFormat,numberFormat } = helper();
 	const [notes, setNotes] = useState([]);
@@ -239,17 +244,11 @@ const Vehicles = () => {
 
 	const contentFormDetailMaintenance = () => {
 		let content 	= []
-		formData.detail_maintenance.map((data,index) => {
+		formData?.detail_maintenance?.map((data,index) => (
 			content.push(<FormDetailMaintenance index={index} formData={data} length={formData.detail_maintenance.length} handleChange={handleChange}  deleteDetailMaintenance={deleteDetailMaintenance}/>)
-		})
+		))
 		return content
 	}
-
-	useEffect(() => {
-		if(!authData.signedIn) {
-			return navigate("/login")
-		}
-	}, []);
 
 	useEffect(() => {
 		getNotes(vehicleActiveId);

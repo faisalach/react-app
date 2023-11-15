@@ -1,23 +1,29 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Navbar from '../components/Navbar';
 import Input from '../components/Input';
 import PopUpAlert from '../components/PopUpAlert';
 import VehicleDropdown from '../components/VehicleDropdown';
 import { useNavigate } from 'react-router-dom';
-import authContext from '../context/authContext';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGasPump,faGauge,faMoneyBillWave,faOilCan,faCoins,faPenAlt, faPlus, faTimes, faEllipsisVertical, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { helper } from "../context/helper";
 import Api from "../context/api";
 import { Spinner } from 'flowbite-react';
+import { useAuth } from '../context/useAuth';
 
 
 const Fuel = () => {
 
-	const navigate = useNavigate();
-	const {authData} = useContext(authContext);
+	const navigate 		= useNavigate();
+	const {userData} 	= useAuth();
+	useEffect(() => {
+		if(!userData.signedIn) {
+			navigate('/login');
+		}
+	}, [userData.signedIn,navigate]);
+
 	const [vehicleActiveId, setVehicleActiveId] = useState(0);
 	const { dateFormat,timeFormat,moneyFormat,numberFormat } = helper();
 	const [vehicleLogs, setVehicleLogs] = useState([]);
@@ -175,12 +181,6 @@ const Fuel = () => {
 		
 		handleDropdown(e);
 	}
-
-	useEffect(() => {
-		if(!authData.signedIn) {
-			return navigate("/login")
-		}
-	}, []);
 
 	useEffect(() => {
 		getLogs(vehicleActiveId);

@@ -1,23 +1,20 @@
-import React, { useContext, useEffect, useState } from 'react';
-import  { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import  { useLocation, useNavigate } from 'react-router-dom';
 import Api from '../context/api';
 
 import { useAuth } from '../context/useAuth';
-import AuthContext from "../context/authContext";
 import Spinner from "../components/Spinner";
 import PopUpAlert from '../components/PopUpAlert';
 import Logo from '../components/Logo';
-
  
 const ResetPassword = () => {
 	const navigate = useNavigate();
-	const {setAsLogged} = useAuth();
-	const {authData} = useContext(AuthContext);
+	const {userData} 	= useAuth();
 	useEffect(() => {
-		if(authData.signedIn) {
+		if(userData.signedIn) {
 			navigate('/');
 		}
-	}, []);
+	}, [userData.signedIn,navigate]);
 
 	const [error, setError] = useState('');
 	const [password, setPassword] = useState('');

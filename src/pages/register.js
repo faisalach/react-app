@@ -1,20 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Api from '../context/api';
 import { Link, useNavigate } from 'react-router-dom';
-import authContext from '../context/authContext';
 import Spinner from '../components/Spinner';
 import { useAuth } from '../context/useAuth';
 import Logo from '../components/Logo';
  
 const Register = () => {
 	const navigate = useNavigate();
-	const {setAsLogged} = useAuth();
-	const {authData} = useContext(authContext);
+	const {setAsLogged,userData} = useAuth();
 	useEffect(() => {
-		if(authData.signedIn) {
+		if(userData.signedIn) {
 			navigate('/');
 		}
-	}, []);
+	}, [userData.signedIn,navigate]);
 
 	const [error, setError] = useState('');
 	const [username, setUsername] = useState('');

@@ -1,19 +1,25 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Navbar from '../components/Navbar';
 import VehicleDropdown from '../components/VehicleDropdown';
 import { useNavigate } from 'react-router-dom';
-import authContext from '../context/authContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Api from '../context/api';
 import { faBell, faClock, faGauge } from '@fortawesome/free-solid-svg-icons';
 import { Spinner } from 'flowbite-react';
 import { helper } from '../context/helper';
+import { useAuth } from '../context/useAuth';
 
 const Reminder = () => {
 
-    const navigate = useNavigate();
-    const {authData} = useContext(authContext);
+    const navigate 		= useNavigate();
+	const {userData} 	= useAuth();
+	useEffect(() => {
+		if(!userData.signedIn) {
+			navigate('/login');
+		}
+	}, [userData.signedIn,navigate]);
+    
     const { dateFormat,numberFormat } = helper();
     const [vehicleActiveId, setVehicleActiveId] = useState(0);
     const [reminders, setReminders] = useState([]);
@@ -37,12 +43,6 @@ const Reminder = () => {
         }
 
     }
-
-    useEffect(() => {
-        if(!authData.signedIn) {
-            return navigate("/login")
-        }   
-    }, []);
 
     useEffect(() => {
         getReminder(vehicleActiveId)
