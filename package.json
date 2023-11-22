@@ -32,7 +32,7 @@
 		"predeploy" : "npm run build",
 		"deploy" : "gh-pages -d build"
 	},
-	"homepage" : "https://faisalach.github.io/react-app",
+	"homepage" : "",
 	"eslintConfig": {
 		"extends": [
 			"react-app",
