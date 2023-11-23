@@ -38,7 +38,7 @@ const Vehicles = () => {
 	})
 	
 	const getVehicles = async () => {
-		await Api.get('/vehicle/get/')
+		await Api.get('/vehicle/get')
 		.then(function (response) {
 			setVehicles(response.data);
 			setIsLoad(true);
@@ -140,6 +140,7 @@ const Vehicles = () => {
 	}
 
 	const handleDeleteForm    = async (e,id) =>{
+		e.preventDefault();
 		alertConfirm("Apakah kamu yakin akan menghapus data ini", async () => {
 			await Api.post('/vehicle/delete/'+id,formData)
 			.then(function (response) {
@@ -164,7 +165,7 @@ const Vehicles = () => {
 			<Navbar page="vehicles" title="Kendaraan">
 				<button type="button" onClick={e => handleModal(true)} className="fixed bottom-10 z-10 right-10 text-white bg-sky-600 hover:bg-sky-800 font-medium text-2xl rounded-full px-4 py-[15px] ring-2 ring-gray-300 shadow-lg sm:ring-0 sm:shadow-none sm:py-2.5 mr-2 mt-2 mb-2 sm:rounded-lg sm:static sm:text-sm">
 					<FontAwesomeIcon fixedWidth icon={faPlus}/>
-					<span className='sm:inline hidden'>Tambah Catatan</span>
+					<span className='sm:inline hidden'>Tambah Kendaraan</span>
 				</button>
 				<div className='grid xl:grid-cols-2 lg:grid-cols-2 gap-2 mt-3'>
 					{

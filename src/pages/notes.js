@@ -194,6 +194,8 @@ const Vehicles = () => {
 	}
 
 	const handleDeleteForm    = async (e,id) =>{
+		e.preventDefault();
+
 		alertConfirm("Apakah kamu yakin akan menghapus data ini", async () => {
 			await Api.post('/maintenance/delete/'+id,formData)
 			.then(function (response) {
