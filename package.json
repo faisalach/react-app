@@ -32,7 +32,7 @@
 		"predeploy" : "npm run build",
 		"deploy" : "gh-pages -d build"
 	},
-	"homepage" : "",
+	"homepage" : "https://m-fuel.000webhostapp.com/",
 	"eslintConfig": {
 		"extends": [
 			"react-app",

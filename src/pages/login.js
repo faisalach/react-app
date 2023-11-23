@@ -31,14 +31,14 @@ const Login = () => {
 				password: password
 			})
 			.then(function (response) {
+				setLoad(false);
 				const data = response.data;
 				setAsLogged(data.user);
-				setLoad(false);
 			})
 			.catch(function (error) {
-				const data = error.response.data;
-				setError(data.message);
 				setLoad(false);
+				const data = error?.response?.data;
+				setError(data?.message);
 			});
 		});
 	}
